@@ -1,14 +1,15 @@
 # функция удаления слова из текста
 def remove_word_from_text(text, word):
-    words = text.split()
-
-    filtered_words = []    # список отфильтрованных слов
-    for w in words:
-        if w.lower() != word.lower():
-            filtered_words.append(w)
-
-    edited_text = " ".join(filtered_words)
-    return edited_text
+    lines = text.split()
+    edited_lines = []    # список отфильтрованных слов
+    for line in lines:
+        words = line.split()
+        for i in words:
+            if i.lower() != word.lower():
+                words_without_word = i
+        edited_line = " ".join(words_without_word)
+        edited_lines.append(edited_line)
+    return "\n".join(edited_lines)
 
 
 # главная функция
