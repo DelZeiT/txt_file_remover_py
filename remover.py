@@ -1,10 +1,10 @@
 # функция удаления слова из текста
-def remove_word_from_text(text, word):
+def remove_words_from_text(text, words_to_remove):
     lines = text.split("\n")
     edited_lines = []    # список отфильтрованных слов
     for line in lines:
         words = line.split()
-        words_without_word = [i for i in words if i.lower() != word.lower()]
+        words_without_word = [i for i in words if i.lower() not in words_to_remove]
         edited_line = " ".join(words_without_word)
         edited_lines.append(edited_line)
     return "\n".join(edited_lines)
@@ -23,10 +23,11 @@ def main():
         print(f"Файл '{input_file_name}' не найден.")
         return
 
-    # запрос слова, необходимого для удаления
-    word_to_remove = input("Введите слово, которое нужно удалить из текста: ")
+    # запрос слов, необходимых для удаления
+    words_to_remove = input("Введите слова, которое нужно удалить из текста: ")
+    words_to_remove = [word.strip().lower() for word in words_to_remove.replace(",", " ").split()]
 
-    edited_content = remove_word_from_text(content, word_to_remove)
+    edited_content = remove_words_from_text(content, words_to_remove)
 
     # запрос имени файла, в который нужно сохранить отредактированный текст
     output_file_name = input("Введите имя файла, куда сохранить отредактированный текст: ")
