@@ -1,12 +1,10 @@
 # функция удаления слова из текста
 def remove_word_from_text(text, word):
-    lines = text.split()
+    lines = text.split("\n")
     edited_lines = []    # список отфильтрованных слов
     for line in lines:
         words = line.split()
-        for i in words:
-            if i.lower() != word.lower():
-                words_without_word = i
+        words_without_word = [i for i in words if i.lower() != word.lower()]
         edited_line = " ".join(words_without_word)
         edited_lines.append(edited_line)
     return "\n".join(edited_lines)
