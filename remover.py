@@ -12,7 +12,7 @@ def remove_words_from_text(text, words_to_remove):
 
 # главная функция
 def main():
-    input_file_name = "textWAR_I.txt"  # Путь к файлу
+    input_file_name = input("Введите полный путь или относительный путь к файлу с текстом для редактирования: ")  # Путь к файлу
 
     # чтение содержимого файла
     try:
@@ -24,13 +24,13 @@ def main():
         return
 
     # запрос слов, необходимых для удаления
-    words_to_remove = input("Введите слова, которое нужно удалить из текста: ")
+    words_to_remove = input("Введите слова, которые нужно удалить из текста: ")
     words_to_remove = [word.strip().lower() for word in words_to_remove.replace(",", " ").split()]
 
     edited_content = remove_words_from_text(content, words_to_remove)
 
     # запрос имени файла, в который нужно сохранить отредактированный текст
-    output_file_name = input("Введите имя файла, куда сохранить отредактированный текст: ")
+    output_file_name = input("Введите полный путь или относительный путь к файлу, куда сохранить отредактированный текст: ")
 
     # запись в файл
     with open(output_file_name, "w", encoding="utf-8") as file:
