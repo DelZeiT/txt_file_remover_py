@@ -10,10 +10,22 @@ def remove_words_from_text(text, words_to_remove):
     return "\n".join(edited_lines)
 
 
+# функция удаления слов с указанной буквой
+def remove_words_with_letter(text, letter_to_remove):
+    lines = text.split("\n")
+    edited_lines = []
+    for line in lines:
+        words = line.split()
+        words_without_letter = [w for w in words if letter_to_remove not in w.lower()]
+        edited_line = " ".join(words_without_letter)
+        edited_lines.append(edited_line)
+    return "\n".join(edited_lines)
+
+
 # главная функция
 def main():
     input_file_name = input("Введите полный путь или относительный путь к файлу с текстом для редактирования: ")  # Путь к файлу
-
+    print()
     # чтение содержимого файла
     try:
         with open(input_file_name, "r", encoding="utf-8") as file:
@@ -23,11 +35,26 @@ def main():
         print(f"Файл '{input_file_name}' не найден.")
         return
 
-    # запрос слов, необходимых для удаления
-    words_to_remove = input("Введите слова, которые нужно удалить из текста: ")
-    words_to_remove = [word.strip().lower() for word in words_to_remove.replace(",", " ").split()]
+    print('''Варианты опции:
+    1 - удалить слово из текста
+    2 - удалить слово с указанной буквой
+    ''')
+    # запрос опции, которые нужно выполнить
+    option = input('Введите опцию, которую нужно выполнить: ')
 
-    edited_content = remove_words_from_text(content, words_to_remove)
+
+    if option == "1":
+        # запрос слов, необходимых для удаления
+        words_to_remove = input("Введите слова, которые нужно удалить из текста: ")
+        words_to_remove = [word.strip().lower() for word in words_to_remove.replace(",", " ").split()]
+        edited_content = remove_words_from_text(content, words_to_remove)
+
+    elif option == "2":
+        # запрос буквы, слова с которой нужно удалить
+        letter_to_remove = input("Введите букву, слова с которой нужно удалить: ")
+
+
+        edited_content = remove_words_with_letter(content, letter_to_remove)
 
     # запрос имени файла, в который нужно сохранить отредактированный текст
     output_file_name = input("Введите полный путь или относительный путь к файлу, куда сохранить отредактированный текст: ")
